@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelería - Carrito de Compras</title>
+    <link rel="stylesheet" href="catalog-styles.css">
+    <link rel="stylesheet" href="cart-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="papeleria.png" alt="Logo Papelería Trejo" class="sidebar-logo-img">
+        <h2>Papelería Trejo</h2>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Inicio</a>
+                <a href="catalog.html" class="menu-item"><i class="fa-solid fa-store"></i> Catálogo</a>
+                <a href="cart.html" class="menu-item active"><i class="fa-solid fa-shopping-cart"></i> Carrito</a>
+                <a href="profile.html" class="menu-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <div class="section-title">
+                    <i class="fa-solid fa-cart-shopping" style="color: #3b82f6; font-size: 1.5rem;"></i>
+                    <h2>Tu Carrito de Compras</h2>
+                </div>
+            </header>
+
+            <div class="cart-main-layout">
+                <section class="cart-list-section">
+                    <div class="cart-top-actions">
+                        <button id="continueShopping" class="btn-secondary"><i class="fa-solid fa-arrow-left"></i> Seguir comprando</button>
+                    </div>
+
+                    <div id="cartList" class="cart-list">
+                        </div>
+
+                    <div id="emptyMessage" class="empty hidden">
+                        <i class="fa-regular fa-folder-open empty-icon"></i>
+                        <p>Tu carrito está actualmente vacío.</p>
+                        <button id="goCatalog" class="btn-primary-action" style="max-width: 200px; margin-top: 1rem;">Ir al Catálogo</button>
+                    </div>
+                </section>
+
+                <aside class="summary-card">
+                    <h3>Resumen de compra</h3>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Envío</span>
+                        <span id="shipping">$0.00</span>
+                    </div>
+                    
+                    <hr class="summary-divider">
+                    <div class="summary-row total">
+                        <strong>Total</strong>
+                        <strong id="total" style="color: #3b82f6;">$0.00</strong>
+                    </div>
+
+                    <div class="summary-actions">
+                        <button id="checkoutBtn" class="btn-primary-action">Proceder al Pago</button>
+                        <button id="clearCart" class="btn-ghost-action"><i class="fa-regular fa-trash-can"></i> Vaciar carrito</button>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <template id="cartItemTemplate">
+        <div class="cart-item">
+            <div class="thumb"></div> <div class="info">
+                <div class="title">Título del Producto</div>
+                <div class="meta">Precio unitario: <span class="price">$0.00</span></div>
+            </div>
+            <div class="controls">
+                <div class="qty-selector">
+                    <button class="qty-btn dec">−</button>
+                    <input class="qty-input" type="number" min="1" value="1" />
+                    <button class="qty-btn inc">+</button>
+                </div>
+                <div class="line-total">$0.00</div>
+                <button class="remove-btn">Eliminar</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="cart.js"></script>
+</body>
+</html>

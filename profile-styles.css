@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelería Trejo - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="papeleria.png" alt="Logo Papelería Trejo" class="sidebar-logo-img">
+        <h2>Papelería Trejo</h2>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <a href="index.html" class="menu-item active"><i class="fa-solid fa-house"></i> Inicio</a>
+                <a href="catalog.html" class="menu-item"><i class="fa-solid fa-store"></i> Catálogo</a>
+                <a href="cart.html" class="menu-item"><i class="fa-solid fa-shopping-cart"></i> Carrito</a>
+                <a href="profile.html" class="menu-item"><i class="fa-solid fa-user"></i> Mi Perfil</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <section class="hero-section">
+                <div class="hero-text">
+                    <h2>¡Bienvenidos a Papelería Trejo!</h2>
+                    <p class="subtitle">Todo lo que necesitas para la escuela, oficina y arte en un diseño limpio y ordenado.</p>
+                    <button id="verCatalogo" class="primary-btn" onclick="window.location.href='catalog.html'">
+                        <i class="fa-solid fa-bag-shopping"></i> Ver Catálogo
+                    </button>
+                </div>
+            </section>
+
+            <section class="offers-section">
+                <div class="section-title">
+                    <i class="fa-solid fa-tags tag-icon"></i>
+                    <h3>Ofertas del Día</h3>
+                </div>
+
+                <div class="offer-list">
+                    <div class="offer-card">
+                        <div class="offer-icon-container">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <div class="offer-info">
+                            <h4>Cuaderno Rayado A4</h4>
+                            <p class="offer-price">$3.50</p>
+                        </div>
+                    </div>
+
+                    <div class="offer-card">
+                        <div class="offer-icon-container">
+                            <i class="fa-solid fa-pen-clip"></i>
+                        </div>
+                        <div class="offer-info">
+                            <h4>Pack Lápices HB x12</h4>
+                            <p class="offer-price">$1.20</p>
+                        </div>
+                    </div>
+
+                    <div class="offer-card">
+                        <div class="offer-icon-container">
+                            <i class="fa-solid fa-highlighter"></i>
+                        </div>
+                        <div class="offer-info">
+                            <h4>Resaltadores Fluorescentes</h4>
+                            <p class="offer-price">$1.50</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

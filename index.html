@@ -1,0 +1,167 @@
+// Tus productos originales restaurados con su respectiva imagen/emoji visual
+const products = [
+  { id: 1, title: 'Cuaderno Rayado', category: 'cuadernos', price: 48, desc: '80 hojas, tapa blanda', image: 'cuaderno.png' },
+  { id: 2, title: 'Lapiz ', category: 'escritura', price: 12, desc: 'Lápices de grafito, caja', image: '✏️' },
+  { id: 3, title: 'Set Acuarelas 12 pz', category: 'arte', price: 22, desc: 'Colores vibrantes', image: '🎨' },
+  { id: 4, title: 'Super tips x50', category: 'arte', price: 400, desc: 'Lavables, punta cónica', image: '🖍️' },
+  { id: 5, title: 'Goma Factis', category: 'escritura', price: 8, desc: 'Borrado, limpio', image: '🧼' },
+  { id: 6, title: 'Tijeras escolares', category: 'herramientas', price: 16, desc: 'Punta roma, acero inoxidable', image: '✂️' }
+];
+
+// Arreglo para manejar los favoritos
+let favoritos = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Renderizar los productos al cargar la página
+    renderProducts(products);
+    setupSearch();
+});
+
+// Función para pintar los productos en la cuadrícula
+function renderProducts(listaProductos) {
+    const grid = document.getElementById('products-container');
+    if (!grid) return;
+    
+    grid.innerHTML = '';
+
+    if (listaProductos.length === 0) {
+        grid.innerHTML = `<p class="empty-message">No se encontraron productos coincidentes.</p>`;
+        return;
+    }
+
+    listaProductos.forEach(p => {
+        const isFav = favoritos.includes(p.id);
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <button class="fav-btn ${isFav ? 'is-favorite' : ''}" onclick="toggleFavorite(${p.id})">
+                <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+            </button>
+            <div class="product-image-placeholder">
+                <img src="${p.image}" alt="${p.title}" class="product-img">
+            </div>
+            <div class="product-info">
+                <p class="product-category">${p.category}</p>
+                <h4>${p.title}</h4>
+            </div>
+            <div class="product-bottom">
+                <span class="product-price">$${p.price.toFixed(2)}</span>
+                <button class="add-cart-btn" onclick="addToCartAction(${p.id}, 1)">Agregar</button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Controlar la sección de favoritos superior
+function toggleFavorite(id) {
+    if (favoritos.includes(id)) {
+        favoritos = favoritos.filter(favId => favId !== id);
+    } else {
+        favoritos.push(id);
+    }
+    
+    // Recargar pantallas
+    renderProducts(products);
+    renderFavorites();
+}
+
+function renderFavorites() {
+    const favContainer = document.getElementById('favorites-container');
+    if (!favContainer) return;
+
+    favContainer.innerHTML = '';
+
+    if (favoritos.length === 0) {
+        favContainer.innerHTML = `<p class="empty-message">Aún no tienes productos favoritos marcados.</p>`;
+        return;
+    }
+
+    const productosFavoritos = products.filter(p => favoritos.includes(p.id));
+
+    productosFavoritos.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <button class="fav-btn is-favorite" onclick="toggleFavorite(${p.id})">
+                <i class="fa-solid fa-heart"></i>
+            </button>
+            <div class="product-image-placeholder">
+                <img src="${p.image}" alt="${p.title}" class="product-img">
+            </div>
+            <div class="product-info">
+                <p class="product-category">${p.category}</p>
+                <h4>${p.title}</h4>
+            </div>
+            <div class="product-bottom">
+                <span class="product-price">$${p.price.toFixed(2)}</span>
+                <button class="add-cart-btn" onclick="addToCartAction(${p.id}, 1)">Agregar</button>
+            </div>
+        `;
+        favContainer.appendChild(card);
+    });
+}
+
+// Configurar el buscador funcional en tiempo real
+function setupSearch() {
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+        const text = e.target.value.toLowerCase();
+        const filtrados = products.filter(p => 
+            p.title.toLowerCase().includes(text) || 
+            p.category.toLowerCase().includes(text)
+        );
+        renderProducts(filtrados);
+    });
+}
+
+// Conexión con el sistema de almacenamiento del Carrito
+function addToCartAction(id, qty) {
+    const CART_KEY = 'elTintero_cart_v1';
+    let cart = [];
+    
+    try {
+        const raw = localStorage.getItem(CART_KEY);
+        cart = raw ? JSON.parse(raw) : [];
+    } catch {
+        cart = [];
+    }
+
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+
+    const idx = cart.findIndex(item => item.id === id);
+    if (idx > -1) {
+        cart[idx].qty += qty;
+    } else {
+        cart.push({ id: p.id, title: p.title, price: p.price, qty: qty });
+    }
+
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    alert(`¡"${p.title}" se añadió al carrito de compras con éxito!`);
+}
+// Revisa en tu catalog.js que al agregar al carrito se pase todo el objeto:
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    
+    let cart = JSON.parse(localStorage.getItem('elTintero_cart_v1')) || [];
+    const target = cart.find(item => item.id === productId);
+    
+    if (target) {
+        target.qty++;
+    } else {
+        // ¡MUY IMPORTANTE! Asegúrate de que "image: product.image" esté aquí adentro
+        cart.push({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image, // <-- Si falta esta línea, el carrito nunca sabrá qué foto usar
+            qty: 1
+        });
+    }
+    
+    localStorage.setItem('elTintero_cart_v1', JSON.stringify(cart));
+    alert('¡Producto agregado al carrito!');
+}

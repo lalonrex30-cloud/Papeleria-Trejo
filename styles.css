@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelería - Mi Perfil</title>
+    <link rel="stylesheet" href="catalog-styles.css">
+    <link rel="stylesheet" href="profile-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="papeleria.png" alt="Logo Papelería Trejo" class="sidebar-logo-img">
+        <h2>Papelería Trejo</h2>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Inicio</a>
+                <a href="catalog.html" class="menu-item"><i class="fa-solid fa-store"></i> Catálogo</a>
+                <a href="cart.html" class="menu-item"><i class="fa-solid fa-shopping-cart"></i> Carrito</a>
+                <a href="profile.html" class="menu-item active"><i class="fa-solid fa-user"></i> Mi Perfil</a>
+            </nav>
+
+           
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <div class="section-title">
+                    <i class="fa-solid fa-circle-user" style="color: #3b82f6; font-size: 1.5rem;"></i>
+                    <h2>Configuración del Perfil</h2>
+                </div>
+            </header>
+
+            <div class="profile-main-layout">
+                
+                <section class="profile-card-section">
+                    <div class="avatar-column">
+                        <div class="avatar-wrapper">
+                            <img id="avatarPreview" src="" alt="Avatar" class="profile-avatar-img" />
+                            <label class="btn-upload">
+                                <i class="fa-solid fa-camera"></i> Cambiar foto
+                                <input id="avatarInput" type="file" accept="image/*" />
+                            </label>
+                            <button id="removeAvatar" class="btn-remove-avatar"><i class="fa-regular fa-trash-can"></i> Eliminar</button>
+                        </div>
+                    </div>
+
+                    <div class="form-column">
+                        <form id="profileForm" class="profile-form-layout" autocomplete="off">
+                            <div class="form-field">
+                                <label for="name">Nombre completo</label>
+                                <input id="name" type="text" required placeholder="Ej. César Trejo" />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="email">Correo electrónico</label>
+                                <input id="email" type="email" required placeholder="correo@ejemplo.com" />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="phone">Teléfono de contacto</label>
+                                <input id="phone" type="tel" placeholder="Número de 10 dígitos" />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="address">Dirección de entrega</label>
+                                <input id="address" type="text" placeholder="Calle, número, colonia..." />
+                            </div>
+
+                            <div class="form-buttons">
+                                <button type="submit" class="btn-save-profile">Guardar cambios</button>
+                                <button type="button" id="resetBtn" class="btn-reset-profile">Restablecer</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="history-section">
+                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Historial de pedidos</h3>
+                    <div id="ordersList" class="orders-timeline">
+                        </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>
